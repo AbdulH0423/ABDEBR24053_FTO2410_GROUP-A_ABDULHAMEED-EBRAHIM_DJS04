@@ -307,12 +307,28 @@ search(event){
 document.querySelector("[data-settings-cancel]").addEventListener("click",()=>{
     toggleModal("data-settings-overlay", false)
 });
+/**
+ * Book preview click event
+ * @param {Event} event - The click event
+ */
 
+bookPreview(event){
+    const previewId = event.target.closest("[data-preview]")?.dataset.preview;
+    if(!previewId) return;
 
+    const book = this.books.find(book => book.id === previewId);
+    if(!book) return;
 
 document.querySelector("[data-header-settings]").addEventListener("click",()=>{
     toggleModal("[data-settings-overlay]", true);
 });
+    document.querySelector("[data-list-blur]").src = book.image;
+    document.querySelector("[data-list-image]").src = book.image;
+    document.querySelector("[data-list-title]").innerText = book.title;
+    document.querySelector("[data-list-subtitle]").innerText = `${this.authors[book.author]} (${new Date(book.published).getFullYear()})`;
+    document.querySelector("[data-list-description]").innerText = book.description;
+    document.querySelector("[data-list-active]").open = true;
+}
 
 
 document.querySelector("[data-settings-form]").addEventListener("submit", (event) => {

@@ -173,8 +173,15 @@ class BookUI extends BookList {
         this.eventListeners();
         this.setupFilters();
         this.loadTheme(); // Load theme from localStorage on startup
+    }
+    /**
+     * Event listeners for the UI
+     */
 
-// Function to filter books
+   eventListeners(){
+    document.querySelector("[data-list-button]").addEventListener("click", () => {
+        this.loadMoreBooks();
+    });
 
 const filterBooks = (filter) => {
     return books.filter(book =>{
@@ -182,27 +189,51 @@ const filterBooks = (filter) => {
         let titleMatch = filter.title.trim() === "" || book.title.toLowerCase().includes(filters.title.toLowerCase());
         let authorMatch = filter.author == "any" || book.author === filter.author;
         return genreMatch && titleMatch && authorMatch;
+    document.querySelector("[data-header-search]").addEventListener("click", () =>{
+        this.toggleModal("[data-search-overlay]", true);
+        document.querySelector("[data-search-title]").focus();
+    });
 
+    document.querySelector("[data-search-cancel]").addEventListener("click", () =>{
+        this.toggleModal("[data-search-overlay]", false);
     });
 };
 
 // Function to load more books
+    document.querySelector("[data-search-form]").addEventListener("submit", (event) => {
+        this.search(event)
+   });
 
 const loadMoreBooks = () => { 
     page += 1;
     renderBooks(matches, document.querySelector("[data-list-items]"),false,page);
 };
+   document.querySelector("[data-header-settings]").addEventListener("click", () => {
+        this.toggleModal("[data-settings-overlay]", true);
+   });
 
 // Initial Render
+   document.querySelector("[data-settings-cancel]").addEventListener("click", () =>{
+    this.toggleModal("[data-settings-overlay]", false);
+   });
 
 const listItemsContainer = document.querySelector("[data-list-items]");
 renderBooks(matches, listItemsContainer);
 populateDropdown(document.querySelector("[data-search-genres]"), genres, "All Genres");
 populateDropdown(document.querySelector("[data-search-authors]"), authors, "All Authors");
 applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" : "day");
+   document.querySelector("[data-list-close]").addEventListener("click", () =>{
+    this.toggleModal("[data-list-active]", false);
+   });
 
+   document.querySelector("[data-list-items]").addEventListener("click", (event)=>{
+    this.bookPreview(event);
+   });
 
 // Event Listeners
+   document.querySelector("[data-settings-form]").addEventListener("submit",(event)=>{
+    this.themeChange(event);
+   });
 
 document.querySelector("[data-search-cancel]").addEventListener("click",()=>{
     toggleModal("[data-search-overlay]", false)

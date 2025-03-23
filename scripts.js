@@ -106,14 +106,29 @@ const populateDropdown = (dropdown, data, defaultText) => {
     populateDropdown.innerHTML = '';
     const firstOption = createElement("option", {value: "any"}, defaultText);
     dropdown.appendChild(firstOption);
+    /**
+     * Filtering based on search filters
+     * @param {Object} filters - The search filters(title, author, genre)
+     */
 
     Object.entries(data).forEach(([id, name]) => {
         const option = createElement("option", { value: id }, name);
         dropdown.appendChild(option);
+    filterBooks(filters){
+        this.matches = this.books.filter(book =>{
+            let genreMatch = filters.genre === "any" || book.genres.includes(filters.genre);
+            return(
+                (filters.title.trim()==="" || book.title.toLowerCase().includes(filters.title.toLowercase())) && 
+                (filters.author === "any" || book.author === filters.author) &&
+                genreMatch
+            );
+        });
 
     });
+        this.page = 1;
 
 };
+    }
 
 
 //Function to toggle modals

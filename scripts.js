@@ -250,10 +250,44 @@ toggleModal(selector, state){
     document.querySelector(selector).open = state;
 }
 
+/**
+ * Populates dropdowns with genres and authors
+ */
+
+setupFilters(){
+    this.populateDropdown("[data-search-genres]", this.genres, "All Genres");
+    this.populateDropdown("[data-search-authors]", this.authors, "All Authors");
+}
+
+/**
+ * Populate dropdown menu
+ * @param {string} selector - The css selector of the dropdown
+ * @param {Object} data - The data to populate the dropdown with
+ * @param {string} firstOption - The first option of the dropdown
+ */
+
+populateDropdown(selector, data, firstOptionText){
+    const fragment = document.createDocumentFragment();
+    const firstOption = document.createElement("option");
+    firstOption.value = "any";
+    firstOption.innertext = firstOptionText;
+    fragment.appendChild(firstOption);
+
+
+    for (const [id, name] of Object.entries(data)){
+        const option = document.createElement("option");
+        option.value = id;
+        option.innerText = name;
+        fragment.appendChild(option);
 
 document.querySelector("[data-header-search]").addEventListener("click",()=>{
     toggleModal("[data-search-overlay]", true)
     document.querySelector("[data-search-title]").focus();
+    }
+
+    document.querySelector(selector).appendChild(fragment);
+}
+
 
 });
 

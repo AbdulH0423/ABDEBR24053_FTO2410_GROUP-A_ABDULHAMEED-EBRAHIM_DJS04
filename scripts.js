@@ -288,9 +288,21 @@ document.querySelector("[data-header-search]").addEventListener("click",()=>{
     document.querySelector(selector).appendChild(fragment);
 }
 
+/**
+ * Search form submission handler
+ * @param {Event} event - The form submission event
+ */
 
 });
+search(event){
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const filters = Object.fromEntries(formData);
 
+    this.filterBooks(filters);
+    this.renderBooks(document.querySelector("[data-list-items]"), true);
+    document.querySelector("[data-search-overlay]").open = false;
+}
 
 document.querySelector("[data-settings-cancel]").addEventListener("click",()=>{
     toggleModal("data-settings-overlay", false)

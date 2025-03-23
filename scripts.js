@@ -153,7 +153,12 @@ const applyTheme = (theme) => {
     document.documentElement.style.setProperty("--color-dark", theme === "night" ? "255, 255, 255" : "10, 10, 20");
     document.documentElement.style.setProperty("--color-light", theme === "night" ? "10, 10, 20" : "255, 255, 255");
 };
+/**
+ * Class for handling the UI
+ * @extends BookList
+ */
 
+class BookUI extends BookList {
 
 
 // Function to filter books

@@ -330,8 +330,13 @@ document.querySelector("[data-header-settings]").addEventListener("click",()=>{
     document.querySelector("[data-list-active]").open = true;
 }
 
+/**
+ * Theme change 
+ * @param {Event} event - the theme change event
+ */
 
 document.querySelector("[data-settings-form]").addEventListener("submit", (event) => {
+themeChange(event){
     event.preventDefault();
     const formData = new FormData(event.target);
     const { theme } = Object.fromEntries(formData);
@@ -339,7 +344,20 @@ document.querySelector("[data-settings-form]").addEventListener("submit", (event
     toggleModal("[data-settings-overlay]", false);
 });
 
+    this.applyTheme(theme);
+    
+    // Save the selected theme to localStorage
+    localStorage.setItem("theme", theme);
 
+    document.querySelector("[data-settings-overlay]").open = false;
+}
+loadTheme() {
+    const savedTheme = localStorage.getItem("theme") || "day"; // Default to "day"
+    this.applyTheme(savedTheme);
+    
+    // Set the dropdown value to the saved theme
+    document.querySelector("[data-settings-theme]").value = savedTheme;
+}
 
 document.querySelector("[data-list-close]").addEventListener("click",()=>{
     toggleModal("[data-list-active]", false);

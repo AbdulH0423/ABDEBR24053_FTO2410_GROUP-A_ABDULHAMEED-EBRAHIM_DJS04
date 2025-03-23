@@ -19,6 +19,22 @@ const createElement = (tag, attributes,innerHTML='') => {
     element.innerHTML = innerHTML;
     return element;
 };
+    /**
+     * Creating a instance of BookList
+     * @param {Array} books - List of books
+     * @param {Object} authours - Dictionary of authors
+     * @param {Object} genres - Dictionary of genres
+     * @param {Number} booksPerPage - Number of books per page
+     */
+
+    constructor(books, authors, genres, booksPerPage) {
+        this.books = books;
+        this.authors = authors;
+        this.genres = genres;
+        this.booksPerPage = booksPerPage;
+        this.page = 1;
+        this.matches = books;
+    }
 
 //Function to render books
 

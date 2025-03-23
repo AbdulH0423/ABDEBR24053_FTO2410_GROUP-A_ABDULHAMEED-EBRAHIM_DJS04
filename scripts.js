@@ -41,7 +41,15 @@ const createElement = (tag, attributes,innerHTML='') => {
 const renderBooks = (bookList, container, clear = false, pageNumber =0) => {
     if (clear) container.innerHTML = '';
     const fragment = document.createDocumentFragment();
+    /**
+     * Rendering books into HTML
+     * @param {HTMLElement} targetElement - Element to render books into
+     * @param {boolean} reset - Wheather to clear the target element before rendering
+     * @param {number} startIndex - The start index of the books to render
+     */
 
+    renderBooks(targetElement, reset = false, startIndex = 0){
+        if(reset)targetElement.innerHTML = "";
 
     bookList.slice(pageNumber * BOOKS_PER_PAGE, (pageNumber + 1) * BOOKS_PER_PAGE).forEach(({ author, id, image, title }) => {
         const bookElement = createElement("button", { class: "preview", "data-preview": id },`
@@ -50,11 +58,18 @@ const renderBooks = (bookList, container, clear = false, pageNumber =0) => {
                 <h3 class="preview__title">${title}</h3>
                 <div class="preview__author">${authors[author]}
             </div>`);
+        const fragment = document.createDocumentFragment();
+        const slicedBooks = this.matches.slice(startIndex, startIndex + this.booksPerPage);
 
+        for(const{author, id, image, title}of slicedBooks){
+            const bookElement = this.createBookElement({author, id, title, image});
             fragment.appendChild(bookElement);
     });
+        }
 
     container.appendChild(fragment);
+        targetElement.appendChild(fragment);
+    }
 
      // Update 'Show More' button
 

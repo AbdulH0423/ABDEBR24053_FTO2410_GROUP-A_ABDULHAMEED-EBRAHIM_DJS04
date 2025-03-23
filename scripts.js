@@ -130,14 +130,22 @@ const populateDropdown = (dropdown, data, defaultText) => {
 };
     }
 
+    /**
+     * Load and render more books
+     * 
+     */
 
-//Function to toggle modals
+    loadMoreBooks(){
+        this.renderBooks(document.querySelector("[data-list-items]"), true, this.page * this.booksPerPage);
 
 const toggleModal = (selector, isOpen) => {
     document.querySelector(selector).open = isOpen;
 };
  
+        this.page += 1;
+    }
 
+}
 
 // Function to apply the Theme
 

@@ -79,7 +79,26 @@ const renderBooks = (bookList, container, clear = false, pageNumber =0) => {
          <span>Show more</span>
          <span class="list__remaining">($ ={Math.max(matches.length - ((pageNumber + 1)* BOOKS_PER_PAGE), 0)})</span>`;
 };
+    /**
+     * Create a preview element for a book
+     * @param {string} id - The id of the book
+     * @param {string} title - The title of the book
+     * @param {string} image - The image of the book
+     * @param {string} author - The author of the book
+     * @returns {HTMLElement} - The preview element
+     */
 
+    createBookElement({author, id, image, title}){
+        const element = document.createElement("button");
+        element.classList.add("preview");
+        element.setAttribute("data-preview", id);
+        element.innerHTML = `
+            <img class="preview__image" src="${image}" />
+            <div class= "preview__info">
+                <h3 class="preview__title">${title}</h3>
+                <div class= "preview__author">${this.authors[author]}</div>
+                </div>
+                `;
 
 // Function to populate dropdowns
 

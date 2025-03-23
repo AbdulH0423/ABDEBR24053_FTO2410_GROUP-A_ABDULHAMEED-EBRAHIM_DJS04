@@ -160,6 +160,19 @@ const applyTheme = (theme) => {
 
 class BookUI extends BookList {
 
+    /**
+     * Creating the BookUI
+     * @param {Array} books - List of books
+     * @param {Object} authors - Dictionary of authors
+     * @param {Object} genres - Dictionary of genres
+     * @param {Number} booksPerPage - Number of books per page
+     */
+
+    constructor(books,authors, genres, booksPerPage){
+        super(books, authors, genres, booksPerPage);
+        this.eventListeners();
+        this.setupFilters();
+        this.loadTheme(); // Load theme from localStorage on startup
 
 // Function to filter books
 

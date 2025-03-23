@@ -238,7 +238,17 @@ applyTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? "night" :
 document.querySelector("[data-search-cancel]").addEventListener("click",()=>{
     toggleModal("[data-search-overlay]", false)
 });
+}
 
+/**
+ * Opens and closes the modal
+ * @param {boolean} state Whether its open or closed
+ * @param {string} selector For the css selector of the modal
+ */
+
+toggleModal(selector, state){
+    document.querySelector(selector).open = state;
+}
 
 
 document.querySelector("[data-header-search]").addEventListener("click",()=>{

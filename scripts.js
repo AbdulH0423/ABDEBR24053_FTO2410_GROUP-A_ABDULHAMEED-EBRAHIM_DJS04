@@ -5,9 +5,13 @@ let page = 1;
 let matches = books
 
 const starting = document.createDocumentFragment()
+/**
+ * Class with book list 
+ */
 
 
 // Helper function to create an element
+class BookList {
 
 const createElement = (tag, attributes,innerHTML='') => {
     const element = document.createElement(tag);

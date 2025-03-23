@@ -375,7 +375,10 @@ applyTheme(theme) {
 }
 
 document.querySelector("[data-list-button]").addEventListener("click", loadMoreBooks);
+//Initialize UI
 
+const bookUI = new BookUI(books, authors, genres, BOOKS_PER_PAGE);
+bookUI.renderBooks(document.querySelector("[data-list-items]"));
 
 
 
